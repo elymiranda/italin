@@ -161,8 +161,8 @@ def main(caminho_planilha):
     buffer.seek(0)
     return nome_saida, buffer
 
-st.title("Italin – Totalizador de Vendas")
-uploaded_file = st.file_uploader("Envie sua planilha de entrada (.xlsx)", type=["xlsx"])
+st.title("Italin – Totalizador de Vendas.")
+uploaded_file = st.file_uploader("Engit vie sua planilha de entrada (.xlsx)", type=["xlsx"])
 if uploaded_file:
     nome_saida, resultado_buffer = main(uploaded_file)
     st.success("Arquivo processado com sucesso!")

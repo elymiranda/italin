@@ -6,6 +6,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill
 from openpyxl.utils import get_column_letter
 from io import BytesIO
+from pytz import timezone
 
 MASSAS_REGRAS = {
     "M": {
@@ -115,7 +116,9 @@ def main(caminho_planilha):
     dados_brutos = pd.read_excel(caminho_planilha, nrows=3, header=None)
     data_inicial = pd.to_datetime(dados_brutos.iloc[1, 0], errors='coerce')
     data_final = pd.to_datetime(dados_brutos.iloc[1, 1], errors='coerce')
-    hora_str = datetime.now().strftime("%H-%M-%S")
+    hora_brasil = datetime.now(timezone("America/Sao_Paulo"))
+    hora_str = hora_brasil.strftime("%H-%M-%S")
+    
     nome_saida = f"italin-de-{data_inicial.strftime('%d-%m-%Y')}-a-{data_final.strftime('%d-%m-%Y')}-{hora_str}.xlsx"
 
     df = pd.read_excel(caminho_planilha, skiprows=3)

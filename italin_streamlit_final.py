@@ -25,7 +25,8 @@ MASSAS_REGRAS = {
         "risoto de camarão": "Arroz Risoto",
         "risoto de ragu de costela": "Arroz Risoto",
         "risoto de quatro queijos": "Arroz Risoto",
-        "spaguetti de abobrinha (box g)": "Espaguete Abobrinha"
+        "spaguetti de abobrinha (box g)": "Espaguete Abobrinha",
+        "spaguette de abobrinha (box g)": "Espaguete Abobrinha"
     }
 }
 
@@ -35,18 +36,20 @@ MASSAS_ORDEM = {
 }
 
 SABORES_REGRAS = [
-    (["quatro queijos (box g)", "nhoque quatro queijos (box g)", "risoto de quatro queijos"], "4 Queijos", "G"),
-    (["quatro queijos (box m)"], "4 Queijos", "M"),
+    (["quatro queijos (box g)", "nhoque quatro queijos (box g)", "risoto de quatro queijos","extra quatro queijos (box g)"], "4 Queijos", "G"),
+    (["quatro queijos (box m)","extra quatro queijos (box m)"], "4 Queijos", "M"),
     (["cheddar com carne e bacon (box g)"], ["Cheddar", "Bolonhesa"], "G"),
     (["cheddar com carne e bacon (box m)"], ["Cheddar", "Bolonhesa"], "M"),
-    (["cheddar com bacon (box g)", "nhoque cheddar com bacon (box g)"], "Cheddar", "G"),
-    (["cheddar com bacon (box m)"], "Cheddar", "M"),
+    (["cheddar com bacon (box g)", "nhoque cheddar com bacon (box g)","extra cheddar (box g)"], "Cheddar", "G"),
+    (["cheddar com bacon (box m)","extra cheddar (box m)"], "Cheddar", "M"),
     (["camarão rosé (box g)", "extra camarão (box g)", "risoto de camarão"], "Camarão", "G"),
     (["camarão rosé (box m)", "extra camarão (box m)"], "Camarão", "M"),
     (["extra ragu (box g)", "ragu de costela (box g)", "risoto de ragu de costela"], "Ragu Costela", "G"),
     (["ragu de costela (box m)", "extra ragu (box m)"], "Ragu Costela", "M"),
-    (["broccoli (box g)"], "Brocolis", "G"),
-    (["broccoli (box m)"], "Brocolis", "M"),
+    (["broccoli (box g)","extra broccoli (box g)"], "Brocolis", "G"),
+    (["broccoli (box m)","extra broccoli (box m)"], "Brocolis", "M"),
+    (["extra presunto (box g)"],"Presunto", "G"),
+    (["extra presunto (box m)"],"Presunto", "M"),
     (["parisiense (box g)", "nhoque parisiense (box g)"], ["Presunto", "Ervilha"], "G"),
     (["parisiense (box m)", "nhoque parisiense (box m)"], ["Presunto", "Ervilha"], "M"),
     (["bolonhesa (box g)", "nhoque bolonhesa (box g)", "extra carne moída (box g)"], "Bolonhesa", "G"),

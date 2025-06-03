@@ -122,7 +122,7 @@ def extrair_diversos(df):
     df['Itens e Opções'] = df['Itens e Opções'].fillna('').str.lower().str.strip().str.replace(r'^- ', '', regex=True)
     diversos = df[~df['Itens e Opções'].isin(usados)].copy()
     diversos = diversos[diversos['Itens e Opções'].str.strip() != '']
-    diversos['Item'] = diversos['Itens e Opções'].str.strip().apply(remover_acentos).str.capitalize()
+    diversos['Item'] = diversos['Itens e Opções'].str.strip()
     total = diversos.groupby('Item', as_index=False)['Quantidade'].sum()
     return total.sort_values('Item')
 

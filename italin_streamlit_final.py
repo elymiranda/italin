@@ -180,6 +180,7 @@ st.set_page_config(page_title="Totalizador de Massas e Sabores")
 st.title("🍝 Totalizador de Massas e Sabores")
 uploaded = st.file_uploader("Envie sua planilha de entrada (.xlsx)", type=["xlsx"])
 
+
 if uploaded:
     nome_saida, resultado = main(uploaded)
     st.success("✅ Planilha gerada com sucesso!")

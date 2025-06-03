@@ -10,9 +10,6 @@ import pytz
 import unicodedata
 from pytz import timezone
 
-def remover_acentos(txt):
-    return ''.join(c for c in unicodedata.normalize('NFD', txt) if unicodedata.category(c) != 'Mn')
-
 MASSAS_REGRAS = {
     "M": {
         "caracolino (box m)": "Caracolino",
@@ -59,12 +56,14 @@ SABORES_REGRAS = [
     (["parisiense (box g)", "nhoque parisiense (box g)"], ["Presunto", "Ervilha"], "G"),
     (["parisiense (box m)", "nhoque parisiense (box m)"], ["Presunto", "Ervilha"], "M"),
     (["bolonhesa (box g)", "nhoque bolonhesa (box g)", "extra carne moída (box g)"], "Bolonhesa", "G"),
-    (["bolonhesa (box m)", "bolonhesa (box kids)", "nhoque bolonhesa (box m)", "extra carne moída (box m)"], "Bolonhesa", "M")
+    (["bolonhesa (box m)", "bolonhesa (box kids)", "nhoque bolonhesa (box m)", "extra carne moída (box m)"], "Bolonhesa", "M"),
+    (["macarrão frango com requeijão cremoso (box m)"],["Frango", "Milho"],"M"),
+    (["macarrão frango com requeijão cremoso (box g)"],["Frango", "Milho"],"G")
 ]
 
 SABORES_ORDEM = {
-    "G": ["Bolonhesa", "Presunto", "Ervilha", "4 Queijos", "Cheddar", "Camarão", "Ragu Costela", "Brocolis"],
-    "M": ["Bolonhesa", "Presunto", "Ervilha", "4 Queijos", "Cheddar", "Camarão", "Ragu Costela", "Brocolis"]
+    "G": ["Bolonhesa", "Presunto", "Ervilha", "4 Queijos", "Cheddar", "Camarão", "Ragu Costela", "Brocolis", "Frango", "Milho"],
+    "M": ["Bolonhesa", "Presunto", "Ervilha", "4 Queijos", "Cheddar", "Camarão", "Ragu Costela", "Brocolis", "Frango", "Milho"]
 }
 
 def totalizar_massas(df):
@@ -120,7 +119,6 @@ def extrair_diversos(df):
     df['Itens e Opções'] = df['Itens e Opções'].fillna('').str.lower().str.strip().str.replace(r'^- ', '', regex=True)
     diversos = df[~df['Itens e Opções'].isin(usados)].copy()
     diversos = diversos[diversos['Itens e Opções'].str.strip() != '']
-    diversos['Item'] = diversos['Itens e Opções'].str.strip().apply(remover_acentos).str.capitalize()
     total = diversos.groupby('Item', as_index=False)['Quantidade'].sum()
     return total.sort_values('Item')
 
@@ -136,9 +134,6 @@ def main(caminho_planilha):
     hora_brasil = datetime.now(timezone("America/Sao_Paulo"))
     hora_str = hora_brasil.strftime("%H-%M-%S")
     nome_saida = f"italin-de-{data_inicial.strftime('%d-%m-%Y')}-a-{data_final.strftime('%d-%m-%Y')}-{hora_str}.xlsx"
-
-
-
 
     buffer = BytesIO()
     wb = Workbook()

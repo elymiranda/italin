@@ -10,6 +10,9 @@ import pytz
 import unicodedata
 from pytz import timezone
 
+def remover_acentos(txt):
+    return ''.join(c for c in unicodedata.normalize('NFD', txt) if unicodedata.category(c) != 'Mn')
+
 MASSAS_REGRAS = {
     "M": {
         "caracolino (box m)": "Caracolino",
@@ -119,6 +122,7 @@ def extrair_diversos(df):
     df['Itens e Opções'] = df['Itens e Opções'].fillna('').str.lower().str.strip().str.replace(r'^- ', '', regex=True)
     diversos = df[~df['Itens e Opções'].isin(usados)].copy()
     diversos = diversos[diversos['Itens e Opções'].str.strip() != '']
+    diversos['Item'] = diversos['Itens e Opções'].str.strip().apply(remover_acentos).str.capitalize()
     total = diversos.groupby('Item', as_index=False)['Quantidade'].sum()
     return total.sort_values('Item')
 
@@ -179,7 +183,6 @@ def main(caminho_planilha):
 st.set_page_config(page_title="Totalizador de Massas e Sabores")
 st.title("🍝 Totalizador de Massas e Sabores")
 uploaded = st.file_uploader("Envie sua planilha de entrada (.xlsx)", type=["xlsx"])
-
 
 if uploaded:
     nome_saida, resultado = main(uploaded)

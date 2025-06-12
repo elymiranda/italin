@@ -61,7 +61,8 @@ SABORES_REGRAS = [
     (["bolonhesa (box g)", "nhoque bolonhesa (box g)", "extra carne moída (box g)"], "Bolonhesa", "G"),
     (["bolonhesa (box m)", "bolonhesa (box kids)", "nhoque bolonhesa (box m)", "extra carne moída (box m)"], "Bolonhesa", "M"),
     (["macarrão frango com requeijão cremoso (box m)"],["Frango", "Milho"],"M"),
-    (["macarrão frango com requeijão cremoso (box g)"],["Frango", "Milho"],"G")
+    (["macarrão frango com requeijão cremoso (box g)"],["Frango", "Milho"],"G"),
+    (["extra frango desfiado (porção 60g)"],"Frango","M"),
 ]
 
 SABORES_ORDEM = {
